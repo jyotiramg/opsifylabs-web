@@ -1,0 +1,133 @@
+.navbar {
+  background: transparent;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 2rem;
+}
+
+.navbar-logo {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 40px;
+  object-fit: contain;
+}
+
+.logo-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(to right, #a78bfa, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.nav-links {
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.nav-links:hover {
+  color: var(--primary-light);
+}
+
+.active-link {
+  color: var(--primary-light);
+  font-weight: 600;
+}
+
+.navbar-btn {
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon {
+  display: none;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media screen and (max-width: 960px) {
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    position: absolute;
+    top: 90px;
+    left: -100%;
+    opacity: 0;
+    transition: all 0.5s ease;
+    padding: 2rem 0;
+    margin: 0 5%;
+  }
+
+  .nav-menu.active {
+    left: 0;
+    opacity: 1;
+    z-index: 1000;
+  }
+
+  .nav-item {
+    margin: 1rem 0;
+  }
+
+  .navbar-btn {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
+    margin-top: 2rem;
+  }
+
+  .menu-icon {
+    display: block;
+    cursor: pointer;
+  }
+}
