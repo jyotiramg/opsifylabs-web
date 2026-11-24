@@ -1,0 +1,54 @@
+.pipeline {
+  margin: 0;
+  padding: 2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(11, 16, 32, .6);
+}
+.pipeline-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; list-style: none; }
+.pipeline-step { position: relative; }
+.pipeline-node {
+  height: 100%;
+  padding: 1.25rem;
+  border-radius: 14px;
+  background: var(--surface-solid);
+  border: 1px solid var(--border);
+}
+.pipeline-node strong { display: block; margin: .75rem 0 .35rem; font-family: 'Space Grotesk', sans-serif; }
+.pipeline-node p { font-size: .85rem; line-height: 1.5; }
+.pipeline-icon { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; }
+.tone-sky .pipeline-icon { background: rgba(14,165,233,.12); color: #38bdf8; }
+.tone-violet .pipeline-icon { background: rgba(139,92,246,.14); color: #a78bfa; }
+.tone-rose .pipeline-icon { background: rgba(244,63,94,.12); color: #fb7185; }
+.tone-green .pipeline-icon { background: rgba(52,211,153,.12); color: #34d399; }
+
+.pipeline-link {
+  position: absolute; top: 50%; left: -1.5rem; width: 1.5rem; height: 2px;
+}
+.pipeline-line {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  background-size: 200% 100%;
+  animation: flow 1.8s linear infinite;
+}
+.pipeline-label {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  white-space: nowrap; font-size: .68rem; font-weight: 600; color: var(--cyan);
+  letter-spacing: .04em;
+}
+@keyframes flow { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+@media (max-width: 860px) {
+  .pipeline { padding: 1.25rem; }
+  .pipeline-flow { grid-template-columns: 1fr; gap: 2.25rem; }
+  .pipeline-link { top: -2.25rem; left: 2rem; width: 2px; height: 2.25rem; }
+  .pipeline-line { background: linear-gradient(180deg, transparent, var(--cyan), transparent); background-size: 100% 200%; animation-name: flowV; }
+  .pipeline-label { bottom: auto; top: 50%; left: 1rem; transform: translateY(-50%); }
+}
+/* Vertical layout for narrow containers */
+.pipeline.compact { padding: 1.25rem; }
+.pipeline.compact .pipeline-flow { grid-template-columns: 1fr; gap: 2.25rem; }
+.pipeline.compact .pipeline-link { top: -2.25rem; left: 2rem; width: 2px; height: 2.25rem; }
+.pipeline.compact .pipeline-line { background: linear-gradient(180deg, transparent, var(--cyan), transparent); background-size: 100% 200%; animation-name: flowV; }
+.pipeline.compact .pipeline-label { bottom: auto; top: 50%; left: 1rem; transform: translateY(-50%); }
+@keyframes flowV { from { background-position: 0 100%; } to { background-position: 0 -100%; } }

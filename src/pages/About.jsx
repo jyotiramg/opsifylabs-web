@@ -1,71 +1,81 @@
 import React from 'react';
-import { Target, Flag, Compass, CheckCircle } from 'lucide-react';
+import { Compass, Target, Flag, Lightbulb, BadgeCheck, HeartHandshake, ShieldCheck, GraduationCap } from 'lucide-react';
+import { process } from '../data/services';
+import { company } from '../data/company';
+import PageHeader from '../components/PageHeader';
+import Reveal from '../components/Reveal';
+import CTA from '../components/CTA';
+import './pages.css';
 
-const About = () => {
-  return (
-    <div className="page-container section">
-      <div className="container animate-fade-in">
-        <h1 className="text-center mb-8">About OpsifyLabs</h1>
-        
-        <div className="glass p-8 mb-8">
-          <h2 className="gradient-text mb-4">Who We Are</h2>
-          <p className="text-muted mb-4">
-            OpsifyLabs is a technology-driven organization committed to delivering excellence in software quality, automation, and digital transformation.
-          </p>
-          <p className="text-muted">
-            Since our founding in 2020, we have been helping organizations navigate complex technology challenges by providing innovative, scalable, and intelligent solutions. Our expertise spans across Quality Engineering, DevOps, and Artificial Intelligence, enabling us to deliver comprehensive solutions that drive business success.
-          </p>
-        </div>
+const values = [
+  { icon: Lightbulb, title: 'Innovation', text: 'We test new tools and approaches before recommending them to clients.' },
+  { icon: BadgeCheck, title: 'Quality excellence', text: 'Every deliverable is tested, reviewed and measured.' },
+  { icon: HeartHandshake, title: 'Customer success', text: 'Your business outcome is the definition of done.' },
+  { icon: ShieldCheck, title: 'Integrity', text: 'Transparent estimates, honest advice, no lock-in.' },
+  { icon: GraduationCap, title: 'Continuous learning', text: 'AI moves fast; our teams train continuously to keep pace.' },
+];
 
-        <div className="grid-3 mb-12">
-          <div className="glass p-6 card-hover">
-            <Compass size={40} color="var(--primary-light)" className="mb-4" />
-            <h3>Our Journey</h3>
-            <p className="text-muted">What started as a focused testing and automation initiative has evolved into a full-fledged technology solutions company. Over the years, OpsifyLabs has successfully delivered multiple projects across domains, helping clients achieve faster time-to-market, improved quality, and operational efficiency.</p>
-          </div>
-          <div className="glass p-6 card-hover delay-100">
-            <Target size={40} color="var(--secondary)" className="mb-4" />
-            <h3>Our Vision</h3>
-            <p className="text-muted">To be a globally recognized leader in AI-driven Quality Engineering and DevOps transformation, empowering organizations to build future-ready digital systems.</p>
-          </div>
-          <div className="glass p-6 card-hover delay-200">
-            <Flag size={40} color="#a78bfa" className="mb-4" />
-            <h3>Our Mission</h3>
-            <p className="text-muted">To enable businesses to deliver secure, scalable, and high-quality software by leveraging cutting-edge technologies, automation, and intelligent solutions.</p>
-          </div>
-        </div>
+const About = () => (
+  <>
+    <PageHeader eyebrow="About us" title={<>Engineering quality into the <span className="gradient-text">AI era</span></>}>
+      OpsifyLabs started in {company.founded} as a focused testing and automation practice. Today we are an AI-first technology
+      partner covering AI consulting, generative AI, AI-powered testing, DevOps and cloud, with delivery teams in India and the US.
+    </PageHeader>
 
-        {/* Core Values */}
-        <h2 className="text-center mb-8">Our Core Values</h2>
-        <div className="grid-3 mb-12">
-          {[
-            { title: 'Innovation', desc: 'Continuously exploring new technologies and approaches' },
-            { title: 'Quality Excellence', desc: 'Ensuring the highest standards in every deliverable' },
-            { title: 'Customer Success', desc: 'Prioritizing client goals and outcomes' },
-            { title: 'Integrity', desc: 'Building trust through transparency and accountability' },
-            { title: 'Continuous Learning', desc: 'Adapting to evolving technologies and industry trends' }
-          ].map((value, idx) => (
-            <div key={idx} className="glass p-6 card-hover">
-              <CheckCircle size={24} color="var(--primary-light)" className="mb-3" />
-              <h4>{value.title}</h4>
-              <p className="text-muted">{value.desc}</p>
-            </div>
+    <section className="section" style={{ paddingTop: '1rem' }}>
+      <div className="container grid grid-3">
+        {[
+          { icon: Compass, title: 'Our journey', text: 'From a quality engineering specialist to a full-stack AI and engineering partner, we have grown by helping clients ship faster without trading off reliability.' },
+          { icon: Target, title: 'Our vision', text: 'To be a globally recognised leader in AI-driven quality engineering and DevOps transformation, helping organisations build future-ready digital systems.' },
+          { icon: Flag, title: 'Our mission', text: 'To help businesses deliver secure, scalable, high-quality software by applying AI, automation and modern engineering where they create real value.' },
+        ].map(({ icon: Ico, title, text }, i) => (
+          <Reveal key={title} delay={i * 80} className="card">
+            <div className="icon-tile"><Ico size={22} /></div>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+
+    <section className="section band">
+      <div className="container">
+        <Reveal className="section-head center">
+          <span className="eyebrow">Values</span>
+          <h2>What we stand for</h2>
+        </Reveal>
+        <div className="values">
+          {values.map(({ icon: Ico, title, text }, i) => (
+            <Reveal key={title} delay={i * 60} className="card">
+              <div className="icon-tile cyan"><Ico size={22} /></div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </Reveal>
           ))}
         </div>
-
-        {/* Approach */}
-        <h2 className="text-center mb-8">Our Approach</h2>
-        <div className="glass p-8 text-center">
-          <p className="text-muted mb-6">We follow a structured and proven approach mapping to your success:</p>
-          <div className="flex justify-center gap-4 flex-wrap">
-            {['Consult', 'Design', 'Build', 'Automate', 'Scale'].map((step, idx) => (
-              <span key={idx} className="btn btn-outline" style={{pointerEvents: 'none'}}>{idx + 1}. {step}</span>
-            ))}
-          </div>
-        </div>
       </div>
-    </div>
-  );
-};
+    </section>
+
+    <section className="section">
+      <div className="container">
+        <Reveal className="section-head center">
+          <span className="eyebrow">Approach</span>
+          <h2>Discover. Design. Build. Validate. Scale.</h2>
+        </Reveal>
+        <ol className="process">
+          {process.map((p, i) => (
+            <Reveal as="li" key={p.step} delay={i * 60} className="process-step">
+              <span className="process-num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{p.step}</h3>
+              <p>{p.desc}</p>
+            </Reveal>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <CTA title="Work with OpsifyLabs" />
+  </>
+);
 
 export default About;

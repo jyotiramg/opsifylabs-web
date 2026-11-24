@@ -1,64 +1,51 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, MapPin, Phone, Linkedin, Github } from 'lucide-react';
+import { servicesByCategory } from '../data/services';
+import { company } from '../data/company';
 import './Footer.css';
 
-const Footer = () => {
-  return (
-    <footer className="footer-container glass">
-      <div className="footer-links">
-        <div className="footer-link-wrapper">
-          <div className="footer-link-items">
-            <img src="/assets/Opsifylabs Logo.png" alt="OpsifyLabs" className="footer-logo" />
-            <p className="footer-desc">
-              Empowering organizations to build high-quality, scalable, and intelligent digital solutions.
-            </p>
-            <div className="social-icons">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><Linkedin /></a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><Twitter /></a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer"><Github /></a>
-            </div>
-          </div>
-          <div className="footer-link-items">
-            <h2>Company</h2>
-            <Link to="/about">About Us</Link>
-            <Link to="/services">Services</Link>
-            <Link to="/case-studies">Case Studies</Link>
-            <Link to="/contact">Contact</Link>
-          </div>
-        </div>
-        <div className="footer-link-wrapper">
-          <div className="footer-link-items">
-            <h2>Services</h2>
-            <Link to="/services">Quality Engineering</Link>
-            <Link to="/devops">DevOps & Platform</Link>
-            <Link to="/ai-solutions">AI & Automation</Link>
-            <Link to="/services">Cloud Services</Link>
-          </div>
-          <div className="footer-link-items">
-            <h2>Contact Us</h2>
-            <div className="contact-item">
-              <MapPin size={18} />
-              <span>India: Viman nager Pune <br/> USA: St. Rose Pkwy, Henderson, NV</span>
-            </div>
-            <div className="contact-item">
-              <Phone size={18} />
-              <span>8600174725</span>
-            </div>
-            <div className="contact-item">
-              <Mail size={18} />
-              <span>contact@opsifylabs.com</span>
-            </div>
-          </div>
+const Footer = () => (
+  <footer className="footer">
+    <div className="container footer-grid">
+      <div className="footer-brand">
+        <img src="/assets/Opsifylabs_Stamp.png" alt="OpsifyLabs" className="footer-logo" />
+        <p>AI-first quality engineering, DevOps and AI consulting. Helping teams innovate, automate and accelerate since {company.founded}.</p>
+        <div className="footer-social">
+          {company.social.linkedin && <a href={company.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={18} /></a>}
+          {company.social.github && <a href={company.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={18} /></a>}
         </div>
       </div>
-      <section className="social-media">
-        <div className="social-media-wrap">
-          <small className="website-rights">OpsifyLabs © {new Date().getFullYear()} All rights reserved.</small>
-        </div>
-      </section>
-    </footer>
-  );
-};
+
+      <div>
+        <h4>AI Services</h4>
+        {servicesByCategory('ai').map((s) => <Link key={s.slug} to={`/services/${s.slug}`}>{s.title}</Link>)}
+      </div>
+
+      <div>
+        <h4>Engineering</h4>
+        {servicesByCategory('engineering').map((s) => <Link key={s.slug} to={`/services/${s.slug}`}>{s.title}</Link>)}
+        <h4 style={{ marginTop: '1.5rem' }}>Company</h4>
+        <Link to="/about">About</Link>
+        <Link to="/case-studies">Case Studies</Link>
+        <Link to="/contact">Contact</Link>
+      </div>
+
+      <div>
+        <h4>Get in touch</h4>
+        <a href={`mailto:${company.email}`} className="footer-contact"><Mail size={16} /> {company.email}</a>
+        <a href={`tel:${company.phoneHref}`} className="footer-contact"><Phone size={16} /> {company.phone}</a>
+        {company.offices.map((o) => (
+          <span key={o.label} className="footer-contact"><MapPin size={16} /> <span><strong>{o.label}:</strong> {o.short}</span></span>
+        ))}
+      </div>
+    </div>
+
+    <div className="container footer-bottom">
+      <small>© {new Date().getFullYear()} OpsifyLabs. All rights reserved.</small>
+      <small>Innovate. Automate. Accelerate.</small>
+    </div>
+  </footer>
+);
 
 export default Footer;

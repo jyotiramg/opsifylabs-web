@@ -1,158 +1,137 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
-import './Contact.css';
+import { useSearchParams } from 'react-router-dom';
+import { Mail, MapPin, Phone, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { services, getService } from '../data/services';
+import { company } from '../data/company';
+import PageHeader from '../components/PageHeader';
+import './pages.css';
+
+// Set VITE_CONTACT_ENDPOINT (e.g. a Formspree / Web3Forms / your own API URL)
+// to receive submissions as JSON. Without it the form opens the visitor's
+// email client with the message prefilled, so no enquiry is silently lost.
+const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT;
+
+const empty = { name: '', email: '', company: '', service: '', budget: '', message: '', website: '' };
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    service: 'quality-engineering',
-    message: ''
-  });
+  const [params] = useSearchParams();
+  const preset = getService(params.get('service')) ? params.get('service') : '';
+  const [form, setForm] = useState({ ...empty, service: preset });
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | mailto | error
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const serviceLabel = getService(form.service)?.title || (form.service === 'other' ? 'Other' : 'Not specified');
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submission
-    alert('Thank you for contacting OpsifyLabs! Your message has been sent successfully.');
-    setFormData({ name: '', email: '', company: '', service: 'quality-engineering', message: '' });
+    if (form.website) return; // honeypot: bots fill hidden fields
+
+    if (!ENDPOINT) {
+      const body = `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${serviceLabel}\nBudget: ${form.budget || 'Not specified'}\n\n${form.message}`;
+      window.location.href = `mailto:${company.email}?subject=${encodeURIComponent(`Enquiry: ${serviceLabel}`)}&body=${encodeURIComponent(body)}`;
+      setStatus('mailto');
+      return;
+    }
+
+    setStatus('sending');
+    try {
+      const { website, ...payload } = form;
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ ...payload, service: serviceLabel }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus('sent');
+      setForm(empty);
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
-    <div className="page-container section">
-      <div className="container animate-fade-in">
-        <h1 className="text-center mb-4">Get In Touch</h1>
-        <p className="text-center text-muted max-w-2xl mx-auto mb-12">
-          We would love to hear from you. Whether you have a question, need a consultation, or want to explore partnership opportunities, our team is here to help.
-        </p>
+    <>
+      <PageHeader eyebrow="Contact" title={<>Let's build something <span className="gradient-text">intelligent</span></>}>
+        Tell us about your project, whether it is an AI idea, a testing bottleneck or a platform that needs to scale.
+        A senior consultant will reply personally.
+      </PageHeader>
 
-        <div className="contact-grid">
-          {/* Contact Info */}
-          <div className="contact-info glass p-8">
-            <h2 className="mb-6 gradient-text">Contact Information</h2>
-            
-            <div className="info-item mb-6">
-              <MapPin className="info-icon" size={24} color="var(--primary-light)" />
-              <div>
-                <h4>India Office</h4>
-                <p className="text-muted">Viman nager Pune</p>
-              </div>
+      <section className="section" style={{ paddingTop: '1rem' }}>
+        <div className="container contact-grid">
+          <aside className="contact-info">
+            <div className="card">
+              <h3 style={{ marginBottom: '1.25rem' }}>Contact details</h3>
+              <a href={`mailto:${company.email}`} className="info-row"><span className="icon-tile"><Mail size={20} /></span><span><strong>Email</strong>{company.email}</span></a>
+              <a href={`tel:${company.phoneHref}`} className="info-row"><span className="icon-tile cyan"><Phone size={20} /></span><span><strong>Phone</strong>{company.phone}</span></a>
+              {company.offices.map((o) => (
+                <div key={o.label} className="info-row"><span className="icon-tile"><MapPin size={20} /></span><span><strong>{o.label} office</strong>{o.full}</span></div>
+              ))}
             </div>
-
-            <div className="info-item mb-6">
-              <MapPin className="info-icon" size={24} color="var(--secondary)" />
-              <div>
-                <h4>US Office</h4>
-                <p className="text-muted">St. Rose Pkwy, Suite 244<br/>Henderson, NV 89052</p>
-              </div>
+            <div className="card">
+              <h3 style={{ marginBottom: '1rem' }}>What happens next</h3>
+              <ol className="next-steps">
+                <li>We review your message and reply to schedule a call.</li>
+                <li>A 30-minute discovery call with a senior consultant.</li>
+                <li>A short written proposal with scope, timeline and cost.</li>
+              </ol>
             </div>
+          </aside>
 
-            <div className="info-item mb-6">
-              <Phone className="info-icon" size={24} color="#a78bfa" />
-              <div>
-                <h4>Phone</h4>
-                <p className="text-muted">8600174725</p>
+          <div className="card">
+            {status === 'sent' ? (
+              <div className="form-done" role="status">
+                <CheckCircle2 size={40} />
+                <h3>Thanks, your message is on its way.</h3>
+                <p>We will be in touch shortly at the email you provided.</p>
+                <button type="button" className="btn btn-ghost" onClick={() => setStatus('idle')}>Send another message</button>
               </div>
-            </div>
-
-            <div className="info-item mb-6">
-              <Mail className="info-icon" size={24} color="#38bdf8" />
-              <div>
-                <h4>Email</h4>
-                <p className="text-muted">contact@opsifylabs.com<br/>Opsifylabs@gmail.com</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="contact-form-container glass p-8">
-            <h2 className="mb-6">Send us a message</h2>
-            <form onSubmit={handleSubmit} className="contact-form">
-              <div className="form-group">
-                <label htmlFor="name">Full Name</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
-                  value={formData.name} 
-                  onChange={handleChange} 
-                  required 
-                  className="form-control"
-                  placeholder="John Doe"
-                />
-              </div>
-
-              <div className="form-group grid-2 gap-4">
-                <div>
-                  <label htmlFor="email">Email Address</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    value={formData.email} 
-                    onChange={handleChange} 
-                    required 
-                    className="form-control"
-                    placeholder="john@example.com"
-                  />
+            ) : (
+              <form className="form" onSubmit={onSubmit}>
+                <div className="form-row">
+                  <label>Full name *<input name="name" value={form.name} onChange={onChange} required autoComplete="name" /></label>
+                  <label>Work email *<input type="email" name="email" value={form.email} onChange={onChange} required autoComplete="email" /></label>
                 </div>
-                <div>
-                  <label htmlFor="company">Company Name</label>
-                  <input 
-                    type="text" 
-                    id="company" 
-                    name="company" 
-                    value={formData.company} 
-                    onChange={handleChange} 
-                    className="form-control"
-                    placeholder="Acme Corp"
-                  />
+                <div className="form-row">
+                  <label>Company<input name="company" value={form.company} onChange={onChange} autoComplete="organization" /></label>
+                  <label>Service of interest
+                    <select name="service" value={form.service} onChange={onChange}>
+                      <option value="">Select a service</option>
+                      {services.map((s) => <option key={s.slug} value={s.slug}>{s.title}</option>)}
+                      <option value="other">Other / not sure yet</option>
+                    </select>
+                  </label>
                 </div>
-              </div>
+                <label>Estimated budget
+                  <select name="budget" value={form.budget} onChange={onChange}>
+                    <option value="">Prefer not to say</option>
+                    <option>Under $10k</option>
+                    <option>$10k – $50k</option>
+                    <option>$50k – $150k</option>
+                    <option>$150k+</option>
+                  </select>
+                </label>
+                <label>How can we help? *
+                  <textarea name="message" rows={6} value={form.message} onChange={onChange} required placeholder="Goals, timeline, current challenges..." />
+                </label>
+                <label className="sr-only" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={onChange} /></label>
 
-              <div className="form-group">
-                <label htmlFor="service">Service Required</label>
-                <select 
-                  id="service" 
-                  name="service" 
-                  value={formData.service} 
-                  onChange={handleChange} 
-                  className="form-control select-control"
-                >
-                  <option value="quality-engineering">Quality Engineering & Testing</option>
-                  <option value="devops">DevOps & Platform Engineering</option>
-                  <option value="ai-solutions">AI & Intelligent Automation</option>
-                  <option value="cloud">Cloud & Infrastructure Services</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
+                {status === 'error' && (
+                  <p className="form-msg err" role="alert"><AlertCircle size={16} /> Something went wrong. Please email us directly at {company.email}.</p>
+                )}
+                {status === 'mailto' && (
+                  <p className="form-msg" role="status"><CheckCircle2 size={16} /> Your email app should have opened with the message ready to send. If not, write to {company.email}.</p>
+                )}
 
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea 
-                  id="message" 
-                  name="message" 
-                  rows="5" 
-                  value={formData.message} 
-                  onChange={handleChange} 
-                  required 
-                  className="form-control text-area"
-                  placeholder="How can we help you?"
-                ></textarea>
-              </div>
-
-              <button type="submit" className="btn btn-primary w-full mt-4">
-                Send Message <Send size={18} />
-              </button>
-            </form>
+                <button type="submit" className="btn btn-primary btn-lg" disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Sending...' : <>Send message <Send size={18} /></>}
+                </button>
+              </form>
+            )}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
