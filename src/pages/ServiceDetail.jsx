@@ -80,7 +80,7 @@ const ServiceDetail = () => {
           <div className="container">
             <Reveal className="section-head">
               <span className="eyebrow">Reference architecture</span>
-              <h2>Local AI agent workflow on AWS or Azure</h2>
+              <h2>Local AI agent workflow on AWS, Azure or GCP</h2>
               <p className="lead">Agents run inside your network with local models and reach your cloud account over private connections only when needed.</p>
             </Reveal>
             <Reveal><LocalAgentWorkflow /></Reveal>

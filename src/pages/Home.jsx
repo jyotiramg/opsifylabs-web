@@ -165,9 +165,9 @@ const Home = () => (
       <div className="container">
         <Reveal className="section-head split-head">
           <div style={{ maxWidth: '46rem' }}>
-            <span className="eyebrow">Local AI agents · AWS &amp; Azure</span>
+            <span className="eyebrow">Local AI agents · AWS, Azure &amp; GCP</span>
             <h2 style={{ marginBottom: '1rem' }}>Agent workflows that keep <span className="gradient-text">your data at home</span></h2>
-            <p className="lead">We set up agents that run on your own machines with local models, and connect privately to AWS or Azure only when they need more power. Switch between clouds and follow the flow.</p>
+            <p className="lead">We set up agents that run on your own machines with local models, and connect privately to AWS, Azure or Google Cloud only when they need more power. Switch between clouds and follow the flow.</p>
           </div>
           <Link to="/services/ai-agents" className="link-arrow">Agentic AI services <ArrowRight size={16} /></Link>
         </Reveal>

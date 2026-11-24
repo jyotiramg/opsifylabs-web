@@ -37,7 +37,7 @@ const LocalAgentWorkflow = ({ defaultCloud = 'aws' }) => {
     <div className="law">
       <div className="law-head">
         <div className="law-toggle" role="tablist" aria-label="Cloud provider">
-          {[['aws', 'AWS'], ['azure', 'Azure']].map(([k, label]) => (
+          {[['aws', 'AWS'], ['azure', 'Azure'], ['gcp', 'GCP']].map(([k, label]) => (
             <button key={k} type="button" role="tab" aria-selected={cloud === k} className={cloud === k ? 'active' : ''} onClick={() => setCloud(k)}>
               {label}
             </button>

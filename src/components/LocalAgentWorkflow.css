@@ -2,7 +2,7 @@
 .law-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .law-toggle { display: inline-flex; padding: 4px; border-radius: 999px; border: 1px solid var(--border-strong); background: rgba(8,20,26,.6); }
 .law-toggle button {
-  padding: .5rem 1.25rem; border-radius: 999px; border: 0; cursor: pointer;
+  padding: .5rem 1.1rem; border-radius: 999px; border: 0; cursor: pointer;
   background: transparent; color: var(--text-muted); font-weight: 600;
 }
 .law-toggle button.active { background: var(--grad); color: #021a19; }
@@ -19,12 +19,14 @@
 .law-zone.cloud { border-style: solid; animation: lawSwap .35s ease; }
 .law-zone.cloud.aws { border-color: rgba(255,153,0,.35); }
 .law-zone.cloud.azure { border-color: rgba(0,120,212,.5); }
+.law-zone.cloud.gcp { border-color: rgba(52,168,83,.5); }
 @keyframes lawSwap { from { opacity: .3; transform: translateX(6px); } to { opacity: 1; transform: none; } }
 .law-zone header { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; margin-bottom: .25rem; }
 .law-zone header span { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; }
 .law-zone header small { color: var(--text-dim); font-size: .78rem; }
 .law-zone.aws header span { color: #ffb547; }
 .law-zone.azure header span { color: #4aa8ff; }
+.law-zone.gcp header span { color: #5bd17a; }
 
 .law-node {
   display: flex; gap: .75rem; align-items: center; padding: .7rem .8rem; border-radius: 12px;

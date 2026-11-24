@@ -48,7 +48,7 @@ export const devopsStages = [
     key: 'monitor', label: 'Monitor', loop: 'ops',
     title: 'Anomaly detection & feedback',
     points: ['Anomalies spotted across logs, metrics and traces', 'Noisy alerts grouped into one actionable signal', 'Production insights fed back into the next Plan'],
-    tools: ['Datadog', 'Grafana', 'CloudWatch / Azure Monitor'],
+    tools: ['Datadog', 'Grafana', 'CloudWatch', 'Azure Monitor', 'Cloud Monitoring'],
   },
 ];
 
@@ -68,6 +68,7 @@ export const localAgentArch = {
   link: {
     aws: { name: 'Private link', desc: 'Site-to-Site VPN or Direct Connect + AWS PrivateLink · IAM Identity Center' },
     azure: { name: 'Private link', desc: 'VPN Gateway or ExpressRoute + Private Endpoints · Microsoft Entra ID' },
+    gcp: { name: 'Private link', desc: 'Cloud VPN or Cloud Interconnect + Private Service Connect · Cloud IAM' },
   },
   cloud: {
     aws: {
@@ -86,6 +87,15 @@ export const localAgentArch = {
         { id: 'workers', icon: 'Container', name: 'AKS / Container Apps', desc: 'Long-running and parallel agent jobs' },
         { id: 'rag', icon: 'Database', name: 'Blob + Azure AI Search', desc: 'Documents and vector search for RAG' },
         { id: 'observe', icon: 'Activity', name: 'Monitor · App Insights · Key Vault', desc: 'Tracing, audit logs, keys and secrets' },
+      ],
+    },
+    gcp: {
+      title: 'Google Cloud', subtitle: 'Your GCP project',
+      nodes: [
+        { id: 'model', icon: 'Sparkles', name: 'Vertex AI', desc: 'Gemini, Claude and open models for heavy reasoning' },
+        { id: 'workers', icon: 'Container', name: 'GKE / Cloud Run', desc: 'Long-running and parallel agent jobs' },
+        { id: 'rag', icon: 'Database', name: 'Cloud Storage + Vector Search', desc: 'Documents and vector search for RAG' },
+        { id: 'observe', icon: 'Activity', name: 'Cloud Logging · Trace · Secret Manager', desc: 'Tracing, audit logs, keys and secrets' },
       ],
     },
   },
