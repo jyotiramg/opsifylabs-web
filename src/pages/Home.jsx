@@ -7,6 +7,7 @@ import { getProduct } from '../data/products';
 import SdlcOrchestrator from '../components/SdlcOrchestrator';
 import DevOpsAiLoop from '../components/DevOpsAiLoop';
 import LocalAgentWorkflow from '../components/LocalAgentWorkflow';
+import AutomationSections from '../components/AutomationSections';
 import ServiceCard from '../components/ServiceCard';
 import AgentPipeline from '../components/AgentPipeline';
 import Reveal from '../components/Reveal';
@@ -15,12 +16,12 @@ import CTA from '../components/CTA';
 import './pages.css';
 
 const consoleLines = [
-  { t: 'run', text: 'agent.test("checkout with saved card")' },
-  { t: 'ok', text: 'navigate /cart · 312ms' },
-  { t: 'ok', text: 'select payment → "Visa •••• 4242"' },
-  { t: 'ok', text: 'assert order confirmation visible' },
-  { t: 'heal', text: 'locator changed: #pay-btn → healed' },
-  { t: 'eval', text: 'llm-eval faithfulness 0.97 · hallucination 0' },
+  { t: 'run', text: 'agent.run("process vendor invoices")' },
+  { t: 'ok', text: 'collected 25 invoices from ap@ inbox' },
+  { t: 'ok', text: 'extracted 14 fields · confidence 97%' },
+  { t: 'ok', text: 'three-way match: 21 matched' },
+  { t: 'human', text: '3 exceptions → sent to Finance for approval' },
+  { t: 'done', text: 'posted 24 to ERP · 1 duplicate held' },
 ];
 
 const tech = ['Playwright', 'Model Context Protocol', 'OpenAI', 'Claude', 'LangChain', 'Kubernetes', 'Terraform', 'AWS', 'Azure', 'GCP', 'Databricks', 'Cypress'];
@@ -33,28 +34,29 @@ const Home = () => (
     <section className="hero">
       <div className="container hero-grid">
         <div>
-          <span className="eyebrow"><Sparkles size={14} /> AI-first IT services</span>
+          <span className="eyebrow"><Sparkles size={14} /> AI consulting &amp; agentic automation</span>
           <h1>
-            Build, test and scale<br />
-            <span className="gradient-text">AI-driven software</span>
+            Turn manual work into<br />
+            <span className="gradient-text">AI agent workflows</span>
           </h1>
           <p className="lead hero-lead">
-            OpsifyLabs helps businesses adopt AI with confidence: AI consulting, generative AI and agent development,
-            AI-powered testing and the DevOps and cloud engineering that keep it all running.
+            OpsifyLabs is an AI consulting partner. We find the repetitive workflows that slow your teams down, rebuild
+            them as secure AI agent workflows with people in control, and measure the time and cost you save.
+            Backed by our AI testing, DevOps and cloud engineering.
           </p>
           <div className="btn-row">
-            <Link to="/contact" className="btn btn-primary btn-lg">Book a free consultation <ArrowRight size={18} /></Link>
-            <Link to="/services" className="btn btn-ghost btn-lg">Explore services</Link>
+            <Link to="/contact?service=ai-agents" className="btn btn-primary btn-lg">Get a free automation assessment <ArrowRight size={18} /></Link>
+            <a href="#live" className="btn btn-ghost btn-lg">See a live workflow</a>
           </div>
           <ul className="hero-points">
-            <li><CheckCircle2 size={16} /> Vendor-neutral advice</li>
-            <li><CheckCircle2 size={16} /> Proof of value in weeks</li>
-            <li><CheckCircle2 size={16} /> Quality built in</li>
+            <li><CheckCircle2 size={16} /> Less manual effort</li>
+            <li><CheckCircle2 size={16} /> People approve what matters</li>
+            <li><CheckCircle2 size={16} /> Savings measured, not promised</li>
           </ul>
         </div>
 
         <div className="console" aria-hidden="true">
-          <div className="console-bar"><span /><span /><span /><em>opsify-agent · test run</em></div>
+          <div className="console-bar"><span /><span /><span /><em>opsify-agent · invoice workflow</em></div>
           <div className="console-body">
             {consoleLines.map((l, i) => (
               <div key={i} className={`console-line c-${l.t}`} style={{ animationDelay: `${300 + i * 380}ms` }}>
@@ -62,7 +64,7 @@ const Home = () => (
               </div>
             ))}
             <div className="console-line c-sum" style={{ animationDelay: `${300 + consoleLines.length * 380}ms` }}>
-              ✓ 24 passed · 1 healed · 0 failed
+              ✓ done · 3 human approvals · 0 manual data entry
             </div>
           </div>
         </div>
@@ -77,6 +79,8 @@ const Home = () => (
         </div>
       </div>
     </section>
+
+    <AutomationSections showPageLink />
 
     {/* Product: QA Agent Orchestrator */}
     <section className="section">

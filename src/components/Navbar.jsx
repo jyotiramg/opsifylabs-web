@@ -6,9 +6,10 @@ import Icon from './Icon';
 import './Navbar.css';
 
 const links = [
+  { name: 'AI Automation', path: '/ai-automation' },
   { name: 'QA Agent Orchestrator', path: '/products/qa-agent-orchestrator', badge: 'New' },
   { name: 'Case Studies', path: '/case-studies' },
-  { name: 'About', path: '/about' },
+  { name: 'About', path: '/about', mobileOnly: true },
   { name: 'Contact', path: '/contact' },
 ];
 
@@ -84,7 +85,7 @@ const Navbar = () => {
               </div>
             )}
           </li>
-          {links.map((l) => (
+          {links.filter((l) => !l.mobileOnly).map((l) => (
             <li key={l.path}>
               <NavLink to={l.path} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>{l.name}{l.badge && <span className="badge">{l.badge}</span>}</NavLink>
             </li>

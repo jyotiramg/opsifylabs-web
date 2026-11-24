@@ -40,7 +40,8 @@
 .c-run .console-tag { color: #2dd4bf; }
 .c-ok .console-tag { color: #34d399; }
 .c-heal .console-tag { color: #fbbf24; }
-.c-eval .console-tag { color: var(--cyan); }
+.c-eval .console-tag, .c-done .console-tag { color: var(--cyan); }
+.c-human .console-tag { color: #fbbf24; }
 .c-sum { margin-top: .5rem; padding-top: .8rem; border-top: 1px dashed var(--border-strong); color: #34d399; font-weight: 600; }
 @keyframes lineIn { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
 
@@ -82,6 +83,9 @@
 
 /* ---------- Process ---------- */
 .process { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; list-style: none; counter-reset: none; }
+.process.process-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1024px) { .process.process-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .process.process-4 { grid-template-columns: 1fr; } }
 .process-step {
   padding: 1.5rem; border-radius: var(--radius);
   border: 1px solid var(--border); background: var(--surface);
