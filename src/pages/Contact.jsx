@@ -65,7 +65,7 @@ const Contact = () => {
           <aside className="contact-info">
             <div className="card">
               <h3 style={{ marginBottom: '1.25rem' }}>Contact details</h3>
-              <a href={`mailto:${company.email}`} className="info-row"><span className="icon-tile"><Mail size={20} /></span><span><strong>Email</strong>{company.email}</span></a>
+              <div className="info-row"><span className="icon-tile"><Mail size={20} /></span><span><strong>Email</strong>{company.emails.map((e) => <a key={e} href={`mailto:${e}`} className="info-link">{e}</a>)}</span></div>
               <a href={`tel:${company.phoneHref}`} className="info-row"><span className="icon-tile cyan"><Phone size={20} /></span><span><strong>Phone</strong>{company.phone}</span></a>
               {company.offices.map((o) => (
                 <div key={o.label} className="info-row"><span className="icon-tile"><MapPin size={20} /></span><span><strong>{o.label} office</strong>{o.full}</span></div>

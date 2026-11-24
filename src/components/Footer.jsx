@@ -35,7 +35,9 @@ const Footer = () => (
 
       <div>
         <h4>Get in touch</h4>
-        <a href={`mailto:${company.email}`} className="footer-contact"><Mail size={16} /> {company.email}</a>
+        {company.emails.map((e) => (
+          <a key={e} href={`mailto:${e}`} className="footer-contact"><Mail size={16} /> {e}</a>
+        ))}
         <a href={`tel:${company.phoneHref}`} className="footer-contact"><Phone size={16} /> {company.phone}</a>
         {company.offices.map((o) => (
           <span key={o.label} className="footer-contact"><MapPin size={16} /> <span><strong>{o.label}:</strong> {o.short}</span></span>

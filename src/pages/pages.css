@@ -178,3 +178,5 @@ a.info-row:hover > span:last-child { color: var(--cyan); }
 .form-done { display: grid; justify-items: center; text-align: center; gap: 1rem; padding: 3rem 1rem; }
 .form-done svg { color: var(--green); }
 .split h2 { margin-bottom: 1rem; }
+.info-link { display: block; }
+.info-link:hover { color: var(--cyan); }
