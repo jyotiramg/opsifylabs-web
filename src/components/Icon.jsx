@@ -2,14 +2,16 @@ import React from 'react';
 import {
   Compass, Sparkles, Bot, ScanSearch, ShieldCheck, Workflow, Database,
   BadgeCheck, Infinity as InfinityIcon, Cloud, Code2, Landmark, HeartPulse,
-  ShoppingCart, Shield, Factory, Layers,
+  ShoppingCart, Shield, Factory, Layers, FileSearch, ListChecks, PlayCircle,
+  Bug, Rocket, Network, UserCheck, GitBranch, ScrollText, Plug, Lock,
 } from 'lucide-react';
 
 // Explicit map keeps lucide tree-shaking intact (no `import *`).
 const map = {
   Compass, Sparkles, Bot, ScanSearch, ShieldCheck, Workflow, Database,
   BadgeCheck, Infinity: InfinityIcon, Cloud, Code2, Landmark, HeartPulse,
-  ShoppingCart, Shield, Factory, Layers,
+  ShoppingCart, Shield, Factory, Layers, FileSearch, ListChecks, PlayCircle,
+  Bug, Rocket, Network, UserCheck, GitBranch, ScrollText, Plug, Lock,
 };
 
 const Icon = ({ name, ...props }) => {

@@ -6,6 +6,7 @@ import Icon from './Icon';
 import './Navbar.css';
 
 const links = [
+  { name: 'QA Agent Orchestrator', path: '/products/qa-agent-orchestrator', badge: 'New' },
   { name: 'Case Studies', path: '/case-studies' },
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
@@ -46,10 +47,10 @@ const Navbar = () => {
   const servicesActive = pathname.startsWith('/services');
 
   return (
-    <nav className={`nav ${scrolled || mobileOpen ? 'nav-solid' : ''}`} aria-label="Main">
+    <nav className={`nav ${scrolled || mobileOpen ? 'nav-solid' : ''} ${mobileOpen ? 'nav-open' : ''}`} aria-label="Main">
       <div className="container nav-inner">
         <Link to="/" className="nav-logo" aria-label="OpsifyLabs home">
-          <img src="/assets/Opsifylabs_Stamp.png" alt="OpsifyLabs" />
+          <img src="/assets/opsifylabs-logo-horizontal.png" alt="OpsifyLabs" width="236" height="34" />
         </Link>
 
         <ul className="nav-links">
@@ -85,7 +86,7 @@ const Navbar = () => {
           </li>
           {links.map((l) => (
             <li key={l.path}>
-              <NavLink to={l.path} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>{l.name}</NavLink>
+              <NavLink to={l.path} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>{l.name}{l.badge && <span className="badge">{l.badge}</span>}</NavLink>
             </li>
           ))}
         </ul>
@@ -105,6 +106,10 @@ const Navbar = () => {
 
       {mobileOpen && (
         <div className="mobile-panel">
+          <div className="mobile-group">
+            <p className="mega-title">Product</p>
+            <Link to="/products/qa-agent-orchestrator" className="mobile-link">QA Agent Orchestrator <span className="badge">New</span></Link>
+          </div>
           {Object.entries(categories).map(([key, cat]) => (
             <div key={key} className="mobile-group">
               <p className="mega-title">{cat.label}</p>
@@ -116,7 +121,7 @@ const Navbar = () => {
           <div className="mobile-group">
             <p className="mega-title">Company</p>
             <Link to="/services" className="mobile-link">All services</Link>
-            {links.map((l) => <Link key={l.path} to={l.path} className="mobile-link">{l.name}</Link>)}
+            {links.filter((l) => !l.badge).map((l) => <Link key={l.path} to={l.path} className="mobile-link">{l.name}</Link>)}
           </div>
           <Link to="/contact" className="btn btn-primary btn-lg" style={{ width: '100%' }}>Book a consultation</Link>
         </div>

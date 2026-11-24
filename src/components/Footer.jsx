@@ -9,7 +9,7 @@ const Footer = () => (
   <footer className="footer">
     <div className="container footer-grid">
       <div className="footer-brand">
-        <img src="/assets/Opsifylabs_Stamp.png" alt="OpsifyLabs" className="footer-logo" />
+        <img src="/assets/opsifylabs-logo-dark.png" alt="OpsifyLabs: Innovate, Automate, Accelerate" className="footer-logo" />
         <p>AI-first quality engineering, DevOps and AI consulting. Helping teams innovate, automate and accelerate since {company.founded}.</p>
         <div className="footer-social">
           {company.social.linkedin && <a href={company.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={18} /></a>}
@@ -25,6 +25,8 @@ const Footer = () => (
       <div>
         <h4>Engineering</h4>
         {servicesByCategory('engineering').map((s) => <Link key={s.slug} to={`/services/${s.slug}`}>{s.title}</Link>)}
+        <h4 style={{ marginTop: '1.5rem' }}>Product</h4>
+        <Link to="/products/qa-agent-orchestrator">QA Agent Orchestrator</Link>
         <h4 style={{ marginTop: '1.5rem' }}>Company</h4>
         <Link to="/about">About</Link>
         <Link to="/case-studies">Case Studies</Link>

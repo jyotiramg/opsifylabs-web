@@ -10,6 +10,7 @@ import ServiceDetail from './pages/ServiceDetail';
 import CaseStudies from './pages/CaseStudies';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route path="/products/:slug" element={<ProductDetail />} />
+          <Route path="/products" element={<Navigate to="/products/qa-agent-orchestrator" replace />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/contact" element={<Contact />} />
           {/* Old URLs kept working */}

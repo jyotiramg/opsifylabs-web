@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, Sparkles, Clock, Target } from 'lucide-react';
 import { services, servicesByCategory, process, industries } from '../data/services';
 import { caseStudies } from '../data/caseStudies';
+import { getProduct } from '../data/products';
+import SdlcOrchestrator from '../components/SdlcOrchestrator';
 import ServiceCard from '../components/ServiceCard';
 import AgentPipeline from '../components/AgentPipeline';
 import Reveal from '../components/Reveal';
@@ -20,6 +22,8 @@ const consoleLines = [
 ];
 
 const tech = ['Playwright', 'Model Context Protocol', 'OpenAI', 'Claude', 'LangChain', 'Kubernetes', 'Terraform', 'AWS', 'Azure', 'GCP', 'Databricks', 'Cypress'];
+
+const qaOrchestrator = getProduct('qa-agent-orchestrator');
 
 const Home = () => (
   <>
@@ -69,6 +73,24 @@ const Home = () => (
         <div className="marquee-track">
           {[...tech, ...tech].map((t, i) => <span key={i} aria-hidden={i >= tech.length}>{t}</span>)}
         </div>
+      </div>
+    </section>
+
+    {/* Product: QA Agent Orchestrator */}
+    <section className="section">
+      <div className="container">
+        <Reveal className="section-head split-head">
+          <div style={{ maxWidth: '46rem' }}>
+            <span className="eyebrow">Our product <span className="badge">{qaOrchestrator.badge}</span></span>
+            <h2 style={{ marginBottom: '1rem' }}>{qaOrchestrator.name}: <span className="gradient-text">SDLC agentic workflow</span></h2>
+            <p className="lead">{qaOrchestrator.short}</p>
+          </div>
+          <div className="btn-row">
+            <Link to={`/products/${qaOrchestrator.slug}`} className="btn btn-primary">Explore the product <ArrowRight size={16} /></Link>
+            <Link to={`/contact?service=${qaOrchestrator.slug}`} className="btn btn-ghost">Request a demo</Link>
+          </div>
+        </Reveal>
+        <Reveal><SdlcOrchestrator stages={qaOrchestrator.stages} /></Reveal>
       </div>
     </section>
 

@@ -1,6 +1,6 @@
 .footer {
   border-top: 1px solid var(--border);
-  background: rgba(5, 7, 15, .9);
+  background: rgba(4, 11, 15, .9);
   padding: 4rem 0 2rem;
 }
 .footer-grid {
@@ -8,7 +8,7 @@
   grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
   gap: 2.5rem;
 }
-.footer-logo { height: 40px; width: auto; margin-bottom: 1rem; }
+.footer-logo { width: 170px; height: auto; margin-bottom: 1.25rem; }
 .footer-brand p { font-size: .9rem; max-width: 22rem; }
 .footer h4 {
   font-family: 'Inter', sans-serif;
@@ -29,7 +29,7 @@
   display: grid; place-items: center;
   border: 1px solid var(--border-strong); margin: 0;
 }
-.footer-social a:hover { border-color: var(--violet); color: var(--text); }
+.footer-social a:hover { border-color: var(--brand); color: var(--text); }
 .footer-bottom {
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
   margin-top: 3rem; padding-top: 1.5rem;

@@ -3,7 +3,7 @@
   padding: 2rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: rgba(11, 16, 32, .6);
+  background: rgba(8, 20, 26, .6);
 }
 .pipeline-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; list-style: none; }
 .pipeline-step { position: relative; }
@@ -18,7 +18,7 @@
 .pipeline-node p { font-size: .85rem; line-height: 1.5; }
 .pipeline-icon { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; }
 .tone-sky .pipeline-icon { background: rgba(14,165,233,.12); color: #38bdf8; }
-.tone-violet .pipeline-icon { background: rgba(139,92,246,.14); color: #a78bfa; }
+.tone-violet .pipeline-icon { background: rgba(20, 184, 166,.14); color: #2dd4bf; }
 .tone-rose .pipeline-icon { background: rgba(244,63,94,.12); color: #fb7185; }
 .tone-green .pipeline-icon { background: rgba(52,211,153,.12); color: #34d399; }
 

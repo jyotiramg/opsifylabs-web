@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, ChevronRight } from 'lucide-react';
 import { getService, services, categories, process } from '../data/services';
 import { caseStudies } from '../data/caseStudies';
+import { getProduct } from '../data/products';
 import Icon from '../components/Icon';
 import Reveal from '../components/Reveal';
 import AgentPipeline from '../components/AgentPipeline';
@@ -17,6 +18,7 @@ const ServiceDetail = () => {
 
   const related = services.filter((s) => s.category === service.category && s.slug !== service.slug).slice(0, 3);
   const study = caseStudies.find((c) => c.service === service.slug);
+  const product = service.product && getProduct(service.product);
 
   return (
     <>
@@ -106,6 +108,23 @@ const ServiceDetail = () => {
           </ol>
         </div>
       </section>
+
+      {product && (
+        <section className="section-sm">
+          <div className="container">
+            <Reveal className="card case-feature card-cta">
+              <div>
+                <span className="chip chip-accent">Product</span>
+                <h3 style={{ margin: '1rem 0 .75rem', fontSize: '1.5rem' }}>{product.name}</h3>
+                <p>{product.short}</p>
+              </div>
+              <div className="btn-row">
+                <Link to={`/products/${product.slug}`} className="btn btn-primary">See the SDLC workflow <ArrowRight size={16} /></Link>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {study && (
         <section className="section">

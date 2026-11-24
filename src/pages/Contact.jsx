@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Mail, MapPin, Phone, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { services, getService } from '../data/services';
 import { company } from '../data/company';
+import { products, getProduct } from '../data/products';
 import PageHeader from '../components/PageHeader';
 import './pages.css';
 
@@ -15,13 +16,15 @@ const empty = { name: '', email: '', company: '', service: '', budget: '', messa
 
 const Contact = () => {
   const [params] = useSearchParams();
-  const preset = getService(params.get('service')) ? params.get('service') : '';
+  const preset = getService(params.get('service')) || getProduct(params.get('service')) ? params.get('service') : '';
   const [form, setForm] = useState({ ...empty, service: preset });
   const [status, setStatus] = useState('idle'); // idle | sending | sent | mailto | error
 
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const serviceLabel = getService(form.service)?.title || (form.service === 'other' ? 'Other' : 'Not specified');
+  const serviceLabel = getService(form.service)?.title
+    || (getProduct(form.service) && `${getProduct(form.service).name} (demo request)`)
+    || (form.service === 'other' ? 'Other' : 'Not specified');
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -97,7 +100,12 @@ const Contact = () => {
                   <label>Service of interest
                     <select name="service" value={form.service} onChange={onChange}>
                       <option value="">Select a service</option>
-                      {services.map((s) => <option key={s.slug} value={s.slug}>{s.title}</option>)}
+                      <optgroup label="Products">
+                        {products.map((p) => <option key={p.slug} value={p.slug}>{p.name} (demo)</option>)}
+                      </optgroup>
+                      <optgroup label="Services">
+                        {services.map((s) => <option key={s.slug} value={s.slug}>{s.title}</option>)}
+                      </optgroup>
                       <option value="other">Other / not sure yet</option>
                     </select>
                   </label>

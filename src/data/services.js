@@ -94,6 +94,7 @@ export const services = [
     outcomes: ['Lower test-maintenance effort', 'Faster regression cycles in CI', 'Coverage traced back to requirements'],
     stack: ['Playwright', 'Model Context Protocol', 'Cypress', 'Selenium', 'Appium', 'Applitools', 'GitHub Actions', 'Jenkins'],
     showDiagram: true,
+    product: 'qa-agent-orchestrator',
   },
   {
     slug: 'ai-assurance',
