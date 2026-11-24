@@ -7,6 +7,8 @@ import { getProduct } from '../data/products';
 import Icon from '../components/Icon';
 import Reveal from '../components/Reveal';
 import AgentPipeline from '../components/AgentPipeline';
+import DevOpsAiLoop from '../components/DevOpsAiLoop';
+import LocalAgentWorkflow from '../components/LocalAgentWorkflow';
 import ServiceCard from '../components/ServiceCard';
 import CTA from '../components/CTA';
 import './pages.css';
@@ -59,6 +61,32 @@ const ServiceDetail = () => {
           </div>
         </div>
       </section>
+
+      {service.visuals?.includes('devopsLoop') && (
+        <section className="section band">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">AI enablement</span>
+              <h2>How we bring AI into every DevOps stage</h2>
+              <p className="lead">Follow the live flow or click a stage to see what AI does there and which tools we use.</p>
+            </Reveal>
+            <Reveal><DevOpsAiLoop /></Reveal>
+          </div>
+        </section>
+      )}
+
+      {service.visuals?.includes('localAgents') && (
+        <section className="section band">
+          <div className="container">
+            <Reveal className="section-head">
+              <span className="eyebrow">Reference architecture</span>
+              <h2>Local AI agent workflow on AWS or Azure</h2>
+              <p className="lead">Agents run inside your network with local models and reach your cloud account over private connections only when needed.</p>
+            </Reveal>
+            <Reveal><LocalAgentWorkflow /></Reveal>
+          </div>
+        </section>
+      )}
 
       {service.showDiagram && (
         <section className="section band">

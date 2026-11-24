@@ -5,6 +5,8 @@ import { services, servicesByCategory, process, industries } from '../data/servi
 import { caseStudies } from '../data/caseStudies';
 import { getProduct } from '../data/products';
 import SdlcOrchestrator from '../components/SdlcOrchestrator';
+import DevOpsAiLoop from '../components/DevOpsAiLoop';
+import LocalAgentWorkflow from '../components/LocalAgentWorkflow';
 import ServiceCard from '../components/ServiceCard';
 import AgentPipeline from '../components/AgentPipeline';
 import Reveal from '../components/Reveal';
@@ -140,6 +142,36 @@ const Home = () => (
           </Reveal>
           <Reveal delay={120}><AgentPipeline compact /></Reveal>
         </div>
+      </div>
+    </section>
+
+    {/* AI across the DevOps cycle */}
+    <section className="section">
+      <div className="container">
+        <Reveal className="section-head split-head">
+          <div style={{ maxWidth: '46rem' }}>
+            <span className="eyebrow">AI enablement · DevOps</span>
+            <h2 style={{ marginBottom: '1rem' }}>AI across the <span className="gradient-text">entire DevOps cycle</span></h2>
+            <p className="lead">We do not bolt one AI tool onto one stage. We enable AI at every step of the loop, from planning to monitoring, and feed production insight back into the next plan. Click any stage to see how.</p>
+          </div>
+          <Link to="/services/devops" className="link-arrow">DevOps &amp; platform engineering <ArrowRight size={16} /></Link>
+        </Reveal>
+        <Reveal><DevOpsAiLoop /></Reveal>
+      </div>
+    </section>
+
+    {/* Local AI agent workflow on AWS / Azure */}
+    <section className="section band">
+      <div className="container">
+        <Reveal className="section-head split-head">
+          <div style={{ maxWidth: '46rem' }}>
+            <span className="eyebrow">Local AI agents · AWS &amp; Azure</span>
+            <h2 style={{ marginBottom: '1rem' }}>Agent workflows that keep <span className="gradient-text">your data at home</span></h2>
+            <p className="lead">We set up agents that run on your own machines with local models, and connect privately to AWS or Azure only when they need more power. Switch between clouds and follow the flow.</p>
+          </div>
+          <Link to="/services/ai-agents" className="link-arrow">Agentic AI services <ArrowRight size={16} /></Link>
+        </Reveal>
+        <Reveal><LocalAgentWorkflow /></Reveal>
       </div>
     </section>
 

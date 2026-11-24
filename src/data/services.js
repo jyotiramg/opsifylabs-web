@@ -56,6 +56,7 @@ export const services = [
   },
   {
     slug: 'ai-agents',
+    visuals: ['localAgents'],
     category: 'ai',
     icon: 'Bot',
     title: 'Agentic AI & Intelligent Automation',
@@ -118,6 +119,7 @@ export const services = [
   },
   {
     slug: 'mlops',
+    visuals: ['localAgents'],
     category: 'ai',
     icon: 'Workflow',
     title: 'MLOps & LLMOps',
@@ -178,6 +180,7 @@ export const services = [
   },
   {
     slug: 'devops',
+    visuals: ['devopsLoop'],
     category: 'engineering',
     icon: 'Infinity',
     title: 'DevOps & Platform Engineering',
@@ -198,6 +201,7 @@ export const services = [
   },
   {
     slug: 'cloud',
+    visuals: ['localAgents'],
     category: 'engineering',
     icon: 'Cloud',
     title: 'Cloud & Infrastructure',

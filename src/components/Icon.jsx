@@ -4,6 +4,7 @@ import {
   BadgeCheck, Infinity as InfinityIcon, Cloud, Code2, Landmark, HeartPulse,
   ShoppingCart, Shield, Factory, Layers, FileSearch, ListChecks, PlayCircle,
   Bug, Rocket, Network, UserCheck, GitBranch, ScrollText, Plug, Lock,
+  Terminal, Cpu, Container, Activity,
 } from 'lucide-react';
 
 // Explicit map keeps lucide tree-shaking intact (no `import *`).
@@ -12,6 +13,7 @@ const map = {
   BadgeCheck, Infinity: InfinityIcon, Cloud, Code2, Landmark, HeartPulse,
   ShoppingCart, Shield, Factory, Layers, FileSearch, ListChecks, PlayCircle,
   Bug, Rocket, Network, UserCheck, GitBranch, ScrollText, Plug, Lock,
+  Terminal, Cpu, Container, Activity,
 };
 
 const Icon = ({ name, ...props }) => {
