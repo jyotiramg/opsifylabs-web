@@ -12,6 +12,7 @@ export const menuColumns = [
   {
     title: 'Solutions',
     items: [
+      { label: 'Agentic AI platform', to: '/platform' },
       { label: 'AI workflow automation', to: '/ai-automation' },
       { label: 'Live workflow demo', to: '/ai-automation#live' },
       { label: 'AI governance & data security', to: '/ai-governance' },
@@ -36,6 +37,7 @@ export const footerColumns = [
   {
     title: 'Resources',
     items: [
+      { label: 'Platform: build · scale · optimize', to: '/platform#build' },
       { label: 'Case studies', to: '/case-studies' },
       { label: 'Savings calculator', to: '/ai-automation#savings' },
       { label: 'AI governance self-check', to: '/ai-governance#readiness' },

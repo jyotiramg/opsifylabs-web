@@ -7,10 +7,11 @@ import { menuColumns } from '../data/siteMap';
 import './Navbar.css';
 
 const links = [
+  { name: 'Platform', path: '/platform' },
   { name: 'AI Automation', path: '/ai-automation' },
   { name: 'AI Governance', path: '/ai-governance' },
   { name: 'QA Agent Orchestrator', path: '/products/qa-agent-orchestrator', badge: 'New' },
-  { name: 'Case Studies', path: '/case-studies' },
+  { name: 'Case Studies', path: '/case-studies', mobileOnly: true },
   { name: 'About', path: '/about', mobileOnly: true },
   { name: 'Contact', path: '/contact', mobileOnly: true },
 ];

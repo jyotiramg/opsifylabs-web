@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound';
 import ProductDetail from './pages/ProductDetail';
 import AIAutomation from './pages/AIAutomation';
 import AIGovernance from './pages/AIGovernance';
+import Platform from './pages/Platform';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/products" element={<Navigate to="/products/qa-agent-orchestrator" replace />} />
           <Route path="/ai-automation" element={<AIAutomation />} />
           <Route path="/ai-governance" element={<AIGovernance />} />
+          <Route path="/platform" element={<Platform />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/contact" element={<Contact />} />
           {/* Old URLs kept working */}
