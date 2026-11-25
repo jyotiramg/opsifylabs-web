@@ -3,6 +3,7 @@ export const company = {
   founded: 2020,
   email: 'contact@opsifylabs.com', // primary: used by the contact form
   emails: ['contact@opsifylabs.com', 'opsifylabs@gmail.com'],
+  enquiryEmail: 'opsifylabs@gmail.com', // contact-form messages are delivered here
   phone: '+91 77688 09555',
   phoneHref: '+917768809555',
   offices: [

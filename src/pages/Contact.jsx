@@ -7,10 +7,9 @@ import { products, getProduct } from '../data/products';
 import PageHeader from '../components/PageHeader';
 import './pages.css';
 
-// Set VITE_CONTACT_ENDPOINT (e.g. a Formspree / Web3Forms / your own API URL)
-// to receive submissions as JSON. Without it the form opens the visitor's
-// email client with the message prefilled, so no enquiry is silently lost.
-const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT;
+// Submissions go to the serverless function in /api/contact, which emails
+// them to company.enquiryEmail. VITE_CONTACT_ENDPOINT can override the URL.
+const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || '/api/contact';
 
 const empty = { name: '', email: '', company: '', service: '', budget: '', message: '', website: '' };
 
@@ -18,7 +17,8 @@ const Contact = () => {
   const [params] = useSearchParams();
   const preset = getService(params.get('service')) || getProduct(params.get('service')) ? params.get('service') : '';
   const [form, setForm] = useState({ ...empty, service: preset });
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | mailto | error
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [error, setError] = useState('');
 
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -30,27 +30,29 @@ const Contact = () => {
     e.preventDefault();
     if (form.website) return; // honeypot: bots fill hidden fields
 
-    if (!ENDPOINT) {
-      const body = `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${serviceLabel}\nBudget: ${form.budget || 'Not specified'}\n\n${form.message}`;
-      window.location.href = `mailto:${company.email}?subject=${encodeURIComponent(`Enquiry: ${serviceLabel}`)}&body=${encodeURIComponent(body)}`;
-      setStatus('mailto');
-      return;
-    }
-
     setStatus('sending');
+    setError('');
     try {
-      const { website, ...payload } = form;
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...payload, service: serviceLabel }),
+        body: JSON.stringify({ ...form, service: serviceLabel }),
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
       setStatus('sent');
       setForm(empty);
-    } catch {
+    } catch (err) {
+      setError(err.message || '');
       setStatus('error');
     }
+  };
+
+  // Last-resort fallback if the server cannot send: open the visitor's email app
+  // with everything prefilled, so the enquiry is never lost.
+  const mailtoFallback = () => {
+    const body = `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${serviceLabel}\nBudget: ${form.budget || 'Not specified'}\n\n${form.message}`;
+    return `mailto:${company.enquiryEmail}?subject=${encodeURIComponent(`Enquiry: ${serviceLabel}`)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
@@ -125,10 +127,13 @@ const Contact = () => {
                 <label className="sr-only" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={onChange} /></label>
 
                 {status === 'error' && (
-                  <p className="form-msg err" role="alert"><AlertCircle size={16} /> Something went wrong. Please email us directly at {company.email}.</p>
-                )}
-                {status === 'mailto' && (
-                  <p className="form-msg" role="status"><CheckCircle2 size={16} /> Your email app should have opened with the message ready to send. If not, write to {company.email}.</p>
+                  <div className="form-msg err" role="alert">
+                    <AlertCircle size={16} />
+                    <span>
+                      {error && !/^HTTP|fetch|network/i.test(error) ? `${error} ` : 'Your message could not be sent. '}
+                      Please try again, or <a href={mailtoFallback()} className="form-link">email it to {company.enquiryEmail}</a> instead.
+                    </span>
+                  </div>
                 )}
 
                 <button type="submit" className="btn btn-primary btn-lg" disabled={status === 'sending'}>
