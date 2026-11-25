@@ -69,7 +69,7 @@ const AIGovernance = () => (
       </div>
     </section>
 
-    <section className="section">
+    <section id="readiness" className="section">
       <div className="container">
         <Reveal className="section-head">
           <span className="eyebrow">Self-check · 2 minutes</span>

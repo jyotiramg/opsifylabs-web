@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
-import { categories, servicesByCategory, serviceHref } from '../data/services';
-import Icon from './Icon';
+import { services, categories, servicesByCategory, serviceHref } from '../data/services';
+import SiteGrid from './SiteGrid';
+import { menuColumns } from '../data/siteMap';
 import './Navbar.css';
 
 const links = [
@@ -67,22 +68,12 @@ const Navbar = () => {
               Services <ChevronDown size={16} className={menuOpen ? 'rot' : ''} />
             </button>
             {menuOpen && (
-              <div className="mega" role="menu">
-                {Object.entries(categories).map(([key, cat]) => (
-                  <div key={key} className="mega-col">
-                    <p className="mega-title">{cat.label}</p>
-                    {servicesByCategory(key).map((s) => (
-                      <Link key={s.slug} to={serviceHref(s)} className="mega-item" role="menuitem">
-                        <span className={`mega-icon ${key === 'engineering' ? 'cyan' : ''}`}><Icon name={s.icon} size={18} /></span>
-                        <span>
-                          <strong>{s.title}</strong>
-                          <small>{s.short}</small>
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                ))}
-                <Link to="/services" className="mega-footer">View all services <ArrowRight size={16} /></Link>
+              <div className="mega">
+                <SiteGrid columns={menuColumns} onNavigate={() => setMenuOpen(false)} />
+                <div className="mega-foot">
+                  <span>{services.length} AI &amp; engineering services · 1 product · India &amp; USA</span>
+                  <Link to="/services" className="mega-footer">View all services <ArrowRight size={16} /></Link>
+                </div>
               </div>
             )}
           </li>

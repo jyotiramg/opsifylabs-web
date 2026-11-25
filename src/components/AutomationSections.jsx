@@ -41,7 +41,7 @@ const AutomationSections = ({ showPageLink = false }) => (
       </div>
     </section>
 
-    <section className="section">
+    <section id="savings" className="section">
       <div className="container">
         <Reveal className="section-head">
           <span className="eyebrow">Cost &amp; time savings</span>
