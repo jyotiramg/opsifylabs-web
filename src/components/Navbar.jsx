@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
-import { categories, servicesByCategory } from '../data/services';
+import { categories, servicesByCategory, serviceHref } from '../data/services';
 import Icon from './Icon';
 import './Navbar.css';
 
 const links = [
   { name: 'AI Automation', path: '/ai-automation' },
+  { name: 'AI Governance', path: '/ai-governance' },
   { name: 'QA Agent Orchestrator', path: '/products/qa-agent-orchestrator', badge: 'New' },
   { name: 'Case Studies', path: '/case-studies' },
   { name: 'About', path: '/about', mobileOnly: true },
-  { name: 'Contact', path: '/contact' },
+  { name: 'Contact', path: '/contact', mobileOnly: true },
 ];
 
 const Navbar = () => {
@@ -71,7 +72,7 @@ const Navbar = () => {
                   <div key={key} className="mega-col">
                     <p className="mega-title">{cat.label}</p>
                     {servicesByCategory(key).map((s) => (
-                      <Link key={s.slug} to={`/services/${s.slug}`} className="mega-item" role="menuitem">
+                      <Link key={s.slug} to={serviceHref(s)} className="mega-item" role="menuitem">
                         <span className={`mega-icon ${key === 'engineering' ? 'cyan' : ''}`}><Icon name={s.icon} size={18} /></span>
                         <span>
                           <strong>{s.title}</strong>
@@ -92,7 +93,7 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <Link to="/contact" className="btn btn-primary nav-cta">Book a consultation</Link>
+        <Link to="/contact" className="btn btn-primary nav-cta">Book a call</Link>
 
         <button
           type="button"
@@ -115,7 +116,7 @@ const Navbar = () => {
             <div key={key} className="mobile-group">
               <p className="mega-title">{cat.label}</p>
               {servicesByCategory(key).map((s) => (
-                <Link key={s.slug} to={`/services/${s.slug}`} className="mobile-link">{s.title}</Link>
+                <Link key={s.slug} to={serviceHref(s)} className="mobile-link">{s.title}</Link>
               ))}
             </div>
           ))}

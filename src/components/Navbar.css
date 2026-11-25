@@ -20,8 +20,8 @@
 .nav-links { display: flex; align-items: center; gap: .25rem; margin-left: auto; }
 .nav-link {
   display: inline-flex; align-items: center; gap: .3rem;
-  padding: .5rem .9rem; border-radius: 999px;
-  color: var(--text-muted); font-weight: 500; font-size: .95rem;
+  padding: .5rem .75rem; border-radius: 999px;
+  color: var(--text-muted); font-weight: 500; font-size: .93rem;
   background: none; border: 0; cursor: pointer;
   white-space: nowrap;
 }

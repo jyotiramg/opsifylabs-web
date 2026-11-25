@@ -5,7 +5,7 @@ import {
   ShoppingCart, Shield, Factory, Layers, FileSearch, ListChecks, PlayCircle,
   Bug, Rocket, Network, UserCheck, GitBranch, ScrollText, Plug, Lock,
   Terminal, Cpu, Container, Activity, Headphones, UserPlus, BarChart3, Siren,
-  Inbox, Copy, GitCompare, MessageSquare,
+  Inbox, Copy, GitCompare, MessageSquare, KeyRound, EyeOff, Server, ShieldAlert, Scale,
 } from 'lucide-react';
 
 // Explicit map keeps lucide tree-shaking intact (no `import *`).
@@ -15,7 +15,7 @@ const map = {
   ShoppingCart, Shield, Factory, Layers, FileSearch, ListChecks, PlayCircle,
   Bug, Rocket, Network, UserCheck, GitBranch, ScrollText, Plug, Lock,
   Terminal, Cpu, Container, Activity, Headphones, UserPlus, BarChart3, Siren,
-  Inbox, Copy, GitCompare, MessageSquare,
+  Inbox, Copy, GitCompare, MessageSquare, KeyRound, EyeOff, Server, ShieldAlert, Scale,
 };
 
 const Icon = ({ name, ...props }) => {

@@ -214,3 +214,5 @@ a.card:hover, .card.hoverable:hover {
   font-size: .65rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; vertical-align: middle;
   background: var(--grad); color: #021a19;
 }
+
+[id] { scroll-margin-top: calc(var(--nav-h) + 12px); }

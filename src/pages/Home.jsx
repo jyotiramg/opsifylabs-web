@@ -8,6 +8,7 @@ import SdlcOrchestrator from '../components/SdlcOrchestrator';
 import DevOpsAiLoop from '../components/DevOpsAiLoop';
 import LocalAgentWorkflow from '../components/LocalAgentWorkflow';
 import AutomationSections from '../components/AutomationSections';
+import '../components/GovernanceSections.css';
 import ServiceCard from '../components/ServiceCard';
 import AgentPipeline from '../components/AgentPipeline';
 import Reveal from '../components/Reveal';
@@ -81,6 +82,40 @@ const Home = () => (
     </section>
 
     <AutomationSections showPageLink />
+
+    {/* AI governance, compliance & data security */}
+    <section className="section band">
+      <div className="container gov-teaser">
+        <Reveal>
+          <span className="eyebrow">AI governance · compliance · data security</span>
+          <h2 style={{ marginBottom: '1rem' }}>Your data stays <span className="gradient-text">protected in every AI workflow</span></h2>
+          <p className="lead" style={{ marginBottom: '1.5rem' }}>
+            Automation is only worth it if your data is safe. Every system we build sits behind an AI gateway that masks
+            personal data, blocks secrets and attacks, keeps restricted data on local models and logs every decision.
+          </p>
+          <ul className="check-list" style={{ marginBottom: '2rem' }}>
+            <li><CheckCircle2 size={18} /> AI policy, risk tiers and an inventory of every AI tool in use</li>
+            <li><CheckCircle2 size={18} /> PII masking, permission-aware retrieval and data residency</li>
+            <li><CheckCircle2 size={18} /> Aligned with GDPR, India DPDP Act, EU AI Act and ISO/IEC 42001</li>
+          </ul>
+          <div className="btn-row">
+            <Link to="/ai-governance" className="btn btn-primary">AI governance &amp; security <ArrowRight size={16} /></Link>
+            <Link to="/ai-governance#data-shield" className="btn btn-ghost">Try the data shield</Link>
+          </div>
+        </Reveal>
+        <Reveal delay={120} className="gov-mini" aria-hidden="true">
+          <div className="gov-mini-box">
+            <span>Before: what a user pastes</span>
+            <p>Customer <mark className="bad">Priya Nair</mark>, card <mark className="bad">4111 1111 1111 1111</mark>, email <mark className="bad">priya.nair@example.com</mark>: refund missing.</p>
+          </div>
+          <div className="gov-mini-gate">AI gateway · mask PII · block secrets · injection guard · audit log</div>
+          <div className="gov-mini-box">
+            <span>After: what the model receives</span>
+            <p>Customer <mark className="ok">[NAME_1]</mark>, card <mark className="ok">[CARD_1]</mark>, email <mark className="ok">[EMAIL_1]</mark>: refund missing.</p>
+          </div>
+        </Reveal>
+      </div>
+    </section>
 
     {/* Product: QA Agent Orchestrator */}
     <section className="section">

@@ -17,6 +17,7 @@ const ServiceDetail = () => {
   const { slug } = useParams();
   const service = getService(slug);
   if (!service) return <Navigate to="/services" replace />;
+  if (service.href) return <Navigate to={service.href} replace />;
 
   const related = services.filter((s) => s.category === service.category && s.slug !== service.slug).slice(0, 3);
   const study = caseStudies.find((c) => c.service === service.slug);

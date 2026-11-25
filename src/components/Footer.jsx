@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone, Linkedin, Github } from 'lucide-react';
-import { servicesByCategory } from '../data/services';
+import { servicesByCategory, serviceHref } from '../data/services';
 import { company } from '../data/company';
 import './Footer.css';
 
@@ -19,12 +19,12 @@ const Footer = () => (
 
       <div>
         <h4>AI Services</h4>
-        {servicesByCategory('ai').map((s) => <Link key={s.slug} to={`/services/${s.slug}`}>{s.title}</Link>)}
+        {servicesByCategory('ai').map((s) => <Link key={s.slug} to={serviceHref(s)}>{s.title}</Link>)}
       </div>
 
       <div>
         <h4>Engineering</h4>
-        {servicesByCategory('engineering').map((s) => <Link key={s.slug} to={`/services/${s.slug}`}>{s.title}</Link>)}
+        {servicesByCategory('engineering').map((s) => <Link key={s.slug} to={serviceHref(s)}>{s.title}</Link>)}
         <h4 style={{ marginTop: '1.5rem' }}>Product</h4>
         <Link to="/products/qa-agent-orchestrator">QA Agent Orchestrator</Link>
         <h4 style={{ marginTop: '1.5rem' }}>Company</h4>

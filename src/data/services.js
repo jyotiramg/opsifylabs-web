@@ -118,6 +118,19 @@ export const services = [
     stack: ['Promptfoo', 'DeepEval', 'Ragas', 'LangSmith', 'Langfuse', 'Arize Phoenix', 'OWASP LLM Top 10', 'Garak'],
   },
   {
+    slug: 'ai-governance',
+    href: '/ai-governance',
+    category: 'ai',
+    icon: 'Scale',
+    title: 'AI Governance & Data Security',
+    short: 'Use AI without risking your data: governance, compliance and security controls for every AI system.',
+    tagline: 'Safe, compliant AI, built in from day one.',
+    intro: 'See the dedicated AI governance page.',
+    offerings: [],
+    outcomes: [],
+    stack: [],
+  },
+  {
     slug: 'mlops',
     visuals: ['localAgents'],
     category: 'ai',
@@ -243,6 +256,7 @@ export const services = [
 ];
 
 export const getService = (slug) => services.find((s) => s.slug === slug);
+export const serviceHref = (s) => s.href || `/services/${s.slug}`;
 export const servicesByCategory = (cat) => services.filter((s) => s.category === cat);
 
 export const process = [

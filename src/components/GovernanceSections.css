@@ -1,0 +1,33 @@
+.gl-card { display: flex; flex-direction: column; }
+.gl-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.gl-layer { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); }
+.gl-risk {
+  display: flex; gap: .5rem; align-items: flex-start; margin: .25rem 0 1rem;
+  padding: .65rem .8rem; border-radius: 10px; font-size: .86rem;
+  background: rgba(248,113,113,.07); border: 1px solid rgba(248,113,113,.25);
+}
+.gl-risk svg { color: #f87171; flex-shrink: 0; margin-top: .2rem; }
+.gl-risk strong { color: #fca5a5; font-weight: 600; }
+.gl-controls { gap: .55rem; }
+.gl-controls li { font-size: .88rem; }
+
+.gf { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+@media (max-width: 900px) { .gf { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .gf { grid-template-columns: 1fr; } }
+.gf-item { padding: 1rem 1.1rem; border-radius: 12px; border: 1px solid var(--border); background: rgba(8,20,26,.6); display: grid; gap: .25rem; }
+.gf-item strong { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; color: #5eead4; }
+.gf-item span { font-size: .85rem; color: var(--text-muted); }
+.gs-note { margin-top: 1rem; font-size: .8rem; color: var(--text-dim); }
+.gs-disclaimer { margin-top: 1.25rem; font-size: .85rem; color: var(--text-dim); max-width: 52rem; }
+
+/* Home teaser */
+.gov-teaser { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+@media (max-width: 960px) { .gov-teaser { grid-template-columns: 1fr; gap: 2rem; } }
+.gov-mini { display: grid; gap: .6rem; }
+.gov-mini-box { padding: 1rem 1.1rem; border-radius: 12px; border: 1px solid var(--border); background: rgba(8,20,26,.7); }
+.gov-mini-box span { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: .45rem; }
+.gov-mini-box p { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .82rem; line-height: 1.7; color: #cbd5e1; overflow-wrap: anywhere; }
+.gov-mini-box mark { padding: .05rem .3rem; border-radius: 4px; font-weight: 600; }
+.gov-mini-box mark.bad { background: rgba(248,113,113,.18); color: #fca5a5; }
+.gov-mini-box mark.ok { background: rgba(20,184,166,.18); color: #5eead4; }
+.gov-mini-gate { text-align: center; font-size: .82rem; font-weight: 600; color: #5eead4; padding: .45rem; border-radius: 10px; border: 1px dashed rgba(20,184,166,.55); background: rgba(20,184,166,.07); }
