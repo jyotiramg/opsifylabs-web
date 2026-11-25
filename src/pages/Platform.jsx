@@ -70,6 +70,13 @@ const Build = () => {
         <h3>{cap.title}</h3>
         <p>{cap.desc}</p>
         <ul className="check-list">{cap.points.map((p) => <li key={p}><CheckCircle2 size={16} /> {p}</li>)}</ul>
+        {cap.link && (
+          <Link to={cap.link.to} className="pf-ref">
+            <span className="pf-ref-tag">Reference</span>
+            <span><strong>{cap.link.label}</strong><small>{cap.link.note}</small></span>
+            <ArrowRight size={16} />
+          </Link>
+        )}
         <pre className="pf-code" aria-label="Example">
           {cap.code.map((line, i) => <code key={line} style={{ animationDelay: `${150 + i * 160}ms` }}>{line}</code>)}
         </pre>

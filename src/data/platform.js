@@ -15,6 +15,7 @@ export const buildCapabilities = [
     id: 'orchestration', icon: 'Network', title: 'Multi-agent orchestration',
     desc: 'A supervisor agent breaks work into tasks and hands them to specialist agents, with shared memory, retries and deterministic fallbacks.',
     points: ['Supervisor / worker and pipeline patterns', 'Shared state and long-running tasks', 'Hand-off to humans at any step'],
+    link: { to: '/products/qa-agent-orchestrator', label: 'See it in action: QA Agent Orchestrator', note: 'Reference implementation: one orchestrator coordinating six SDLC agents' },
     code: ['supervisor = Orchestrator(policy="approval-on-write")', 'supervisor.add(ResearchAgent, TriageAgent, ActionAgent)', 'supervisor.run(task="resolve ticket #4821")'],
   },
   {
