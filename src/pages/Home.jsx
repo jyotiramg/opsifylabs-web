@@ -8,6 +8,7 @@ import SdlcOrchestrator from '../components/SdlcOrchestrator';
 import DevOpsAiLoop from '../components/DevOpsAiLoop';
 import LocalAgentWorkflow from '../components/LocalAgentWorkflow';
 import AutomationSections from '../components/AutomationSections';
+import AgentMap from '../components/AgentMap';
 import '../components/GovernanceSections.css';
 import ServiceCard from '../components/ServiceCard';
 import AgentPipeline from '../components/AgentPipeline';
@@ -78,6 +79,21 @@ const Home = () => (
         <div className="marquee-track">
           {[...tech, ...tech].map((t, i) => <span key={i} aria-hidden={i >= tech.length}>{t}</span>)}
         </div>
+      </div>
+    </section>
+
+    {/* Agentic company map */}
+    <section className="section">
+      <div className="container">
+        <Reveal className="section-head split-head">
+          <div style={{ maxWidth: '46rem' }}>
+            <span className="eyebrow">Agentic company map</span>
+            <h2 style={{ marginBottom: '1rem' }}>AI agents can run <span className="gradient-text">your entire company</span></h2>
+            <p className="lead">Not just a visual: an interactive map of eight departments and the agent roles inside each. Click a department to open it, or open the brain that connects them all.</p>
+          </div>
+          <Link to="/contact?service=ai-agents" className="btn btn-primary">Get your agent map <ArrowRight size={16} /></Link>
+        </Reveal>
+        <Reveal><AgentMap /></Reveal>
       </div>
     </section>
 

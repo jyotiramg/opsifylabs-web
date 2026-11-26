@@ -13,6 +13,7 @@ export const menuColumns = [
     title: 'Solutions',
     items: [
       { label: 'Agentic AI platform', to: '/platform' },
+      { label: 'Agentic company map', to: '/agent-map' },
       { label: 'AI workflow automation', to: '/ai-automation' },
       { label: 'Live workflow demo', to: '/ai-automation#live' },
       { label: 'AI governance & data security', to: '/ai-governance' },
