@@ -1,84 +1,52 @@
 import React from 'react';
-import { ShieldCheck, Server, Cpu, CloudLightning } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { categories, services } from '../data/services';
+import PageHeader from '../components/PageHeader';
+import ServiceCard from '../components/ServiceCard';
+import Reveal from '../components/Reveal';
+import CTA from '../components/CTA';
+import './pages.css';
+
+const tabs = [{ key: 'all', label: 'All services' }, ...Object.entries(categories).map(([key, c]) => ({ key, label: c.label }))];
 
 const Services = () => {
+  const [params, setParams] = useSearchParams();
+  const active = categories[params.get('category')] ? params.get('category') : 'all';
+  const list = active === 'all' ? services : services.filter((s) => s.category === active);
+
   return (
-    <div className="page-container section">
-      <div className="container animate-fade-in">
-        <div className="text-center mb-12">
-          <h1 className="mb-4">Our Services</h1>
-          <p className="text-muted max-w-2xl mx-auto">
-            OpsifyLabs provides a comprehensive suite of services designed to address the challenges of modern software development and delivery. Our services are built around three key pillars: Quality Engineering, DevOps, and AI.
-          </p>
-        </div>
+    <>
+      <PageHeader eyebrow="Services" title={<>AI and engineering services, <span className="gradient-text">end to end</span></>}>
+        Consulting, build, testing and operations for AI-driven software. Engage us for a single service or a full
+        programme, from first workshop to production support.
+      </PageHeader>
 
-        <div className="mb-12">
-          <div className="glass p-8 flex-col md-flex-row gap-8 mb-8">
-            <div className="flex-1">
-              <ShieldCheck size={48} color="var(--primary-light)" className="mb-4" />
-              <h2 className="gradient-text mb-4">Quality Engineering & Testing</h2>
-              <p className="text-muted mb-4">
-                Quality is at the core of everything we do. Our Quality Engineering services ensure that your applications are reliable, secure, and high-performing.
-              </p>
-              <h4>Our Capabilities Include:</h4>
-              <ul className="text-muted mt-2 ml-4 mb-4" style={{listStyleType: 'disc'}}>
-                <li>Functional Testing</li>
-                <li>Automation Testing (UI, API, Mobile)</li>
-                <li>Regression Testing</li>
-                <li>Performance & Load Testing</li>
-                <li>Security Testing</li>
-                <li>Test Data Management & UAT Support</li>
-              </ul>
-              <p className="text-muted">We adopt a shift-left and shift-right testing approach, ensuring quality is embedded throughout the development lifecycle.</p>
-            </div>
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <div className="tabs" role="tablist" aria-label="Filter services">
+            {tabs.map((t) => (
+              <button
+                key={t.key}
+                type="button"
+                role="tab"
+                aria-selected={active === t.key}
+                className={`tab ${active === t.key ? 'active' : ''}`}
+                onClick={() => setParams(t.key === 'all' ? {} : { category: t.key }, { replace: true })}
+              >
+                {t.label}
+              </button>
+            ))}
           </div>
-
-          <div className="glass p-8 flex-col md-flex-row gap-8 mb-8" style={{marginLeft: 'auto'}}>
-            <div className="flex-1 text-right">
-              <Cpu size={48} color="var(--secondary)" className="mb-4 ml-auto" />
-              <h2 className="gradient-text mb-4">Test Automation</h2>
-              <p className="text-muted mb-4">
-                Automation is key to achieving speed and efficiency. We design and implement scalable and reusable automation frameworks tailored to your needs.
-              </p>
-              <h4 className="mb-2">Technologies & Tools:</h4>
-              <p className="text-muted mb-4">Selenium, Cypress, Playwright, Appium for mobile testing, RestAssured, Postman for API testing, BDD frameworks (Cucumber).</p>
-              <h4>Key Benefits:</h4>
-              <ul className="text-muted mt-2 inline-block text-left" style={{listStyleType: 'disc'}}>
-                <li>Faster regression cycles & Reduced manual effort</li>
-                <li>Improved test coverage & Continuous integration support</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="grid-2 gap-8">
-            <div className="glass p-8 card-hover">
-              <Server size={40} color="#a78bfa" className="mb-4" />
-              <h3>DevOps & Platform Engineering</h3>
-              <p className="text-muted mb-4">We enable organizations to adopt modern DevOps practices that enhance collaboration and accelerate delivery.</p>
-              <ul className="text-muted ml-4 mb-4" style={{listStyleType: 'disc'}}>
-                <li>CI/CD Pipeline Design & Implementation</li>
-                <li>Infrastructure as Code (Terraform, Ansible)</li>
-                <li>Containerization (Docker, Kubernetes)</li>
-                <li>DevSecOps Integration & Observability</li>
-              </ul>
-              <p className="text-muted font-bold">Our DevOps solutions ensure continuous delivery, reduced downtime, and improved system reliability.</p>
-            </div>
-
-            <div className="glass p-8 card-hover">
-              <CloudLightning size={40} color="var(--primary-light)" className="mb-4" />
-              <h3>Cloud & Infrastructure Services</h3>
-              <p className="text-muted mb-4">We help organizations build and manage cloud-native applications that are scalable and resilient.</p>
-              <ul className="text-muted ml-4" style={{listStyleType: 'disc'}}>
-                <li>Cloud Migration (AWS, Azure, GCP)</li>
-                <li>Cloud Architecture Design</li>
-                <li>Cost Optimization</li>
-                <li>Infrastructure Automation</li>
-              </ul>
-            </div>
+          <div className="grid grid-3">
+            {list.map((s, i) => (
+              <Reveal key={s.slug} delay={(i % 3) * 60} style={{ display: 'flex' }}><ServiceCard service={s} /></Reveal>
+            ))}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <CTA title="Need a combination of services?" text="Most clients combine strategy, build and assurance. We will scope a programme around your goals and budget." />
+    </>
   );
 };
 

@@ -1,0 +1,52 @@
+.orch {
+  margin: 0; padding: 2rem;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  background: rgba(8, 20, 26, .6);
+}
+.orch-hub {
+  display: flex; align-items: center; gap: 1rem;
+  width: fit-content; margin: 0 auto;
+  padding: 1rem 1.5rem; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(20,184,166,.22), rgba(34,211,238,.1));
+  border: 1px solid rgba(20,184,166,.5);
+  box-shadow: 0 0 40px -10px rgba(20,184,166,.6);
+}
+.orch-hub strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; }
+.orch-hub small { color: var(--text-muted); font-size: .8rem; }
+.orch-hub-icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--grad); color: #021a19; flex-shrink: 0; }
+
+.orch-bus { position: relative; height: 2.5rem; }
+.orch-bus span {
+  position: absolute; left: 50%; top: 0; width: 2px; height: 1.25rem; background: var(--brand);
+}
+.orch-bus::after {
+  content: ''; position: absolute; left: calc(100% / 12); right: calc(100% / 12); top: 1.25rem; height: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--cyan), var(--brand));
+  background-size: 200% 100%; animation: orchFlow 3s linear infinite;
+}
+@keyframes orchFlow { to { background-position: -200% 0; } }
+
+.orch-stages { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; list-style: none; }
+.orch-stage {
+  position: relative; padding: 1.1rem; border-radius: 12px;
+  background: var(--surface-solid); border: 1px solid var(--border);
+}
+.orch-drop { position: absolute; top: -1.25rem; left: 50%; width: 2px; height: 1.25rem; background: rgba(20,184,166,.6); }
+.orch-step { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); margin-bottom: .75rem; }
+.orch-icon { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: rgba(20,184,166,.14); color: #5eead4; margin-bottom: .75rem; }
+.orch-stage strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: .98rem; margin-bottom: .35rem; }
+.orch-stage p { font-size: .82rem; line-height: 1.5; }
+
+@media (max-width: 1100px) {
+  .orch-stages { grid-template-columns: repeat(3, 1fr); row-gap: 2.25rem; }
+  .orch-bus::after { left: calc(100% / 6); right: calc(100% / 6); }
+}
+@media (max-width: 680px) {
+  .orch { padding: 1.25rem; }
+  .orch-hub { width: 100%; }
+  .orch-bus { height: 1.25rem; }
+  .orch-bus::after { display: none; }
+  .orch-stages { grid-template-columns: 1fr; row-gap: 1.25rem; }
+  .orch-drop { left: 2rem; }
+  .orch-bus span { left: 2rem; }
+}

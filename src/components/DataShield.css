@@ -1,0 +1,73 @@
+.ds { display: grid; grid-template-columns: 300px 1fr 260px; gap: 1rem; align-items: start; }
+@media (max-width: 1150px) { .ds { grid-template-columns: 300px 1fr; } .ds-log { grid-column: 1 / -1; } }
+@media (max-width: 760px) { .ds { grid-template-columns: 1fr; } }
+
+.ds-config, .ds-panel, .ds-log { border-radius: var(--radius); border: 1px solid var(--border); background: rgba(8,20,26,.6); }
+.ds-config { padding: 1.25rem; display: grid; gap: .9rem; }
+.ds-config h3 { font-size: .78rem; font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin: 0; }
+.ds-samples { display: grid; gap: .4rem; }
+.ds-samples button {
+  display: flex; justify-content: space-between; align-items: center; gap: .5rem; text-align: left; cursor: pointer;
+  padding: .6rem .75rem; border-radius: 10px; font: inherit; font-size: .85rem; color: var(--text-muted);
+  background: var(--surface-solid); border: 1px solid var(--border);
+}
+.ds-samples button small { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-dim); white-space: nowrap; }
+.ds-samples button.active { border-color: var(--brand); color: var(--text); background: rgba(20,184,166,.1); }
+.ds-policies { display: grid; gap: .45rem; }
+.ds-toggle { display: flex; align-items: center; gap: .6rem; font-size: .88rem; color: var(--text-muted); cursor: pointer; }
+.ds-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.ds-switch { width: 32px; height: 18px; border-radius: 999px; background: rgba(248,113,113,.35); position: relative; flex-shrink: 0; transition: background .2s ease; }
+.ds-switch::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: transform .2s ease; }
+.ds-toggle.on { color: var(--text); }
+.ds-toggle.on .ds-switch { background: var(--brand); }
+.ds-toggle.on .ds-switch::after { transform: translateX(14px); }
+.ds-toggle input:focus-visible + .ds-switch { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.ds-region { display: grid; gap: .35rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
+.ds-region select { padding: .55rem .7rem; border-radius: 10px; font: inherit; font-size: .88rem; letter-spacing: 0; text-transform: none; font-weight: 500; background: var(--surface-solid); color: var(--text); border: 1px solid var(--border-strong); }
+.ds-config .btn { justify-content: center; }
+
+.ds-flow { display: grid; gap: .75rem; }
+.ds-panel { padding: 1.1rem 1.25rem; }
+.ds-label { display: flex; align-items: center; justify-content: space-between; gap: .5rem; flex-wrap: wrap; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: .6rem; }
+.ds-label em { display: inline-flex; align-items: center; gap: .3rem; font-style: normal; letter-spacing: .04em; padding: .15rem .55rem; border-radius: 999px; font-size: .68rem; }
+.ds-label em.local { background: rgba(52,211,153,.14); color: var(--green); }
+.ds-label em.cloud { background: rgba(34,211,238,.12); color: var(--cyan); }
+.ds-text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .84rem; line-height: 1.75; color: #cbd5e1; overflow-wrap: anywhere; }
+.ds-text mark { padding: .1rem .35rem; border-radius: 5px; font-weight: 600; animation: dsPop .35s ease both; }
+.ds-text mark.masked { background: rgba(20,184,166,.18); color: #5eead4; border: 1px solid rgba(20,184,166,.5); }
+.ds-text mark.exposed { background: rgba(248,113,113,.18); color: #fca5a5; border: 1px solid rgba(248,113,113,.55); }
+@keyframes dsPop { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+.ds-wait { color: var(--text-dim); font-size: .85rem; }
+.ds-blocked-text { color: #fca5a5; }
+
+.ds-gateway {
+  position: relative; overflow: hidden; display: flex; align-items: center; gap: .5rem; justify-content: center; flex-wrap: wrap;
+  padding: .7rem 1rem; border-radius: 12px; font-weight: 600; font-size: .9rem;
+  border: 1px dashed rgba(20,184,166,.55); background: rgba(20,184,166,.07); color: #5eead4;
+}
+.ds-active { font-size: .72rem; font-weight: 600; color: var(--text-muted); padding: .1rem .5rem; border-radius: 999px; border: 1px solid var(--border-strong); }
+.ds-gateway.scanning::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 30%;
+  background: linear-gradient(90deg, transparent, rgba(34,211,238,.35), transparent);
+  animation: dsScan 1s linear infinite;
+}
+.ds-gateway.done { border-style: solid; }
+@keyframes dsScan { from { left: -30%; } to { left: 100%; } }
+
+.ds-verdict { display: flex; gap: .8rem; align-items: flex-start; padding: 1rem 1.1rem; border-radius: 12px; animation: dsPop .35s ease both; }
+.ds-verdict strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; }
+.ds-verdict span { font-size: .85rem; color: var(--text-muted); }
+.ds-verdict > svg { flex-shrink: 0; margin-top: .1rem; }
+.ds-verdict.safe { background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.45); }
+.ds-verdict.safe > svg { color: var(--green); }
+.ds-verdict.blocked { background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.45); }
+.ds-verdict.blocked > svg { color: #fbbf24; }
+.ds-verdict.danger { background: rgba(248,113,113,.1); border: 1px solid rgba(248,113,113,.5); }
+.ds-verdict.danger > svg { color: #f87171; }
+
+.ds-log { padding: 1.1rem; min-height: 240px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .76rem; line-height: 1.5; background: #061116; display: grid; align-content: start; gap: .4rem; }
+.ds-line { padding-left: .9rem; position: relative; color: #b6c2d4; animation: dsPop .25s ease both; }
+.ds-line::before { content: ''; position: absolute; left: 0; top: .45rem; width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim); }
+.ds-line.k-ok::before { background: var(--green); }
+.ds-line.k-bad { color: #fca5a5; }
+.ds-line.k-bad::before { background: #f87171; }
